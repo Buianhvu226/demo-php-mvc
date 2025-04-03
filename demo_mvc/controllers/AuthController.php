@@ -65,7 +65,7 @@ class AuthController
         }
 
         $pageTitle = 'Register';
-        $contentView = 'views/auth/register.php';
+        $contentView = 'views/register.php';
 
         include 'views/application.php';
     }
@@ -107,7 +107,7 @@ class AuthController
         }
 
         $pageTitle = 'Login';
-        $contentView = 'views/auth/login.php';
+        $contentView = 'views/login.php';
 
         include 'views/application.php';
     }

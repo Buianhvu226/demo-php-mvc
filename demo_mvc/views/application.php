@@ -81,10 +81,10 @@
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo BASE_URL; ?>auth//login">Login</a>
+                                <a class="nav-link" href="<?php echo BASE_URL; ?>/login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo BASE_URL; ?>auth/register">Register</a>
+                                <a class="nav-link" href="<?php echo BASE_URL; ?>/register">Register</a>
                             </li>
                         <?php endif; ?>
                     </ul>

@@ -1,12 +1,17 @@
 <?php
 session_start();
 
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Load required files
 require_once 'connection.php';
 require_once 'routes.php';
 
 // Application configuration
-define('BASE_URL', '/demo_mvc');
+// Sử dụng http://localhost:8080/demo_mvc thay vì /demo_mvc
+define('BASE_URL', 'http://localhost:8080/demo_mvc');
 
 // Autoload models
 function loadModel($modelName)
@@ -22,10 +27,17 @@ spl_autoload_register('loadModel');
 // Get current URL path
 $url = $_SERVER['REQUEST_URI'];
 
-// Remove base URL
-if (strpos($url, BASE_URL) === 0) {
-    $url = substr($url, strlen(BASE_URL));
+// Debug - Uncomment dòng này nếu muốn debug
+// echo "Original URL: " . htmlspecialchars($url) . "<br>";
+
+// Remove base path - not full URL
+$basePath = '/demo_mvc';
+if (strpos($url, $basePath) === 0) {
+    $url = substr($url, strlen($basePath));
 }
+
+// Debug - Uncomment dòng này nếu muốn debug
+// echo "Processed URL: " . htmlspecialchars($url) . "<br>";
 
 // Dispatch to router
 $router->dispatch($url);
