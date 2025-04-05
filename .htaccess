@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /demo_mvc/
+    
+    # Nếu không phải file hoặc thư mục thực
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Chuyển hướng tất cả request đến index.php
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>

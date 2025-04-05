@@ -78,14 +78,16 @@ function setupDatabase()
             )
         ");
 
-        // Create subtasks table
+        // Create subtasks table with description field
         $conn->exec("
             CREATE TABLE IF NOT EXISTS subtasks (
                 id SERIAL PRIMARY KEY,
                 task_id INTEGER NOT NULL,
                 title VARCHAR(100) NOT NULL,
+                description TEXT,
                 completed BOOLEAN DEFAULT FALSE,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
             )
         ");

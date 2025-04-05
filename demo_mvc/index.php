@@ -30,10 +30,15 @@ $url = $_SERVER['REQUEST_URI'];
 // Debug - Uncomment dòng này nếu muốn debug
 // echo "Original URL: " . htmlspecialchars($url) . "<br>";
 
-// Remove base path - not full URL
+// Remove base path from URL
 $basePath = '/demo_mvc';
 if (strpos($url, $basePath) === 0) {
     $url = substr($url, strlen($basePath));
+}
+
+// Ensure URL starts with a slash
+if (empty($url) || $url[0] !== '/') {
+    $url = '/' . $url;
 }
 
 // Debug - Uncomment dòng này nếu muốn debug

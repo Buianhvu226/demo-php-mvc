@@ -23,18 +23,49 @@ class Router
             $url = '/';
         }
 
+        // Debug route matching
+        // echo "Looking for route: " . htmlspecialchars($url) . "<br>";
+        // echo "Available routes: " . implode(", ", array_keys($this->routes)) . "<br>";
+
         if (array_key_exists($url, $this->routes)) {
             $controllerName = $this->routes[$url]['controller'];
             $action = $this->routes[$url]['action'];
 
-            require_once "controllers/{$controllerName}.php";
+            // Check if controller file exists
+            $controllerFile = "controllers/{$controllerName}.php";
+            if (!file_exists($controllerFile)) {
+                echo "Controller file not found: {$controllerFile}";
+                http_response_code(500);
+                return;
+            }
+
+            require_once $controllerFile;
+
+            // Check if controller class exists
+            if (!class_exists($controllerName)) {
+                echo "Controller class not found: {$controllerName}";
+                http_response_code(500);
+                return;
+            }
 
             $controller = new $controllerName();
+            
+            // Check if action method exists
+            if (!method_exists($controller, $action)) {
+                echo "Action method not found: {$action} in {$controllerName}";
+                http_response_code(500);
+                return;
+            }
+            
             $controller->$action();
         } else {
             // Handle 404
             http_response_code(404);
-            require_once 'views/404.php';
+            
+            // Set page title for 404 page
+            $pageTitle = '404 - Page Not Found';
+            $contentView = 'views/404.php';
+            include 'views/application.php';
         }
     }
 }
@@ -57,3 +88,6 @@ $router->addRoute('/subtasks/create', 'SubtaskController', 'create');
 $router->addRoute('/subtasks/store', 'SubtaskController', 'store');
 $router->addRoute('/subtasks/update', 'SubtaskController', 'update');
 $router->addRoute('/subtasks/delete', 'SubtaskController', 'delete');
+$router->addRoute('/subtasks/edit', 'SubtaskController', 'edit');
+// Thêm route cho toggle-complete
+$router->addRoute('/subtasks/toggle-complete', 'SubtaskController', 'toggleComplete');

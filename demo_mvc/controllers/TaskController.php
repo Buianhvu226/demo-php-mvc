@@ -76,20 +76,35 @@ class TaskController
     public function edit()
     {
         $id = $_GET['id'] ?? 0;
-        $task = $this->taskModel->getTaskById($id);
-
-        if (!$task || $task['user_id'] != $_SESSION['user_id']) {
-            $_SESSION['message'] = "Task not found or access denied";
+        
+        if (empty($id)) {
+            $_SESSION['message'] = "Invalid task ID";
             $_SESSION['message_type'] = "danger";
             header("Location: " . BASE_URL . "/tasks");
             exit;
         }
-
-        $subtasks = $this->subtaskModel->getAllByTaskId($id);
-
+        
+        $task = $this->taskModel->getTaskById($id);
+        
+        if (!$task) {
+            $_SESSION['message'] = "Task not found";
+            $_SESSION['message_type'] = "danger";
+            header("Location: " . BASE_URL . "/tasks");
+            exit;
+        }
+        
+        if ($task['user_id'] != $_SESSION['user_id']) {
+            $_SESSION['message'] = "You don't have permission to edit this task";
+            $_SESSION['message_type'] = "danger";
+            header("Location: " . BASE_URL . "/tasks");
+            exit;
+        }
+        
+        // Sửa từ getById thành getByTaskId
+        $task['subtasks'] = $this->subtaskModel->getByTaskId($id);
+        
         $pageTitle = 'Edit Task';
         $contentView = 'views/tasks/edit.php';
-
         include 'views/application.php';
     }
 
