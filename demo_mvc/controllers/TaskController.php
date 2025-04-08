@@ -10,7 +10,7 @@ class TaskController
         if (!isset($_SESSION['user_id'])) {
             $_SESSION['message'] = "Please log in first";
             $_SESSION['message_type'] = "danger";
-            header("Location: " . BASE_URL . "/login");
+            header("Location: " . BASE_URL . "/auth/login");
             exit;
         }
 

@@ -74,9 +74,9 @@ $router = new Router();
 
 // Define routes
 $router->addRoute('/', 'HomeController', 'index');
-$router->addRoute('/login', 'AuthController', 'login');
-$router->addRoute('/register', 'AuthController', 'register');
-$router->addRoute('/logout', 'AuthController', 'logout');
+$router->addRoute('/auth/login', 'AuthController', 'login');
+$router->addRoute('/auth/register', 'AuthController', 'register');
+$router->addRoute('/auth/logout', 'AuthController', 'logout');
 $router->addRoute('/tasks', 'TaskController', 'index');
 $router->addRoute('/tasks/create', 'TaskController', 'create');
 $router->addRoute('/tasks/store', 'TaskController', 'store');

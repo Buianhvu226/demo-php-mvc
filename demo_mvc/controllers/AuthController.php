@@ -53,7 +53,7 @@ class AuthController
                 if ($this->userModel->register($username, $email, $password)) {
                     $_SESSION['message'] = "Registration successful! Please log in.";
                     $_SESSION['message_type'] = "success";
-                    header("Location: " . BASE_URL . "/login");
+                    header("Location: " . BASE_URL . "/auth/login");
                     exit;
                 } else {
                     $errors[] = "Registration failed. Please try again.";
@@ -65,7 +65,7 @@ class AuthController
         }
 
         $pageTitle = 'Register';
-        $contentView = 'views/register.php';
+        $contentView = 'views/auth/register.php';
 
         include 'views/application.php';
     }
@@ -107,7 +107,7 @@ class AuthController
         }
 
         $pageTitle = 'Login';
-        $contentView = 'views/login.php';
+        $contentView = 'views/auth/login.php';
 
         include 'views/application.php';
     }
@@ -121,7 +121,7 @@ class AuthController
         session_destroy();
 
         // Redirect to login page
-        header("Location: " . BASE_URL . "/login");
+        header("Location: " . BASE_URL . "/auth/login");
         exit;
     }
 }

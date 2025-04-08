@@ -16,7 +16,7 @@
                     <?php unset($_SESSION['errors']); ?>
                 <?php endif; ?>
 
-                <form action="<?php echo BASE_URL; ?>/login" method="post">
+                <form action="<?php echo BASE_URL; ?>/auth/login" method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -31,7 +31,7 @@
                 </form>
 
                 <div class="mt-3">
-                    Don't have an account? <a href="<?php echo BASE_URL; ?>/register">Register</a>
+                    Don't have an account? <a href="<?php echo BASE_URL; ?>/auth/register">Register</a>
                 </div>
             </div>
         </div>
